@@ -1,0 +1,41 @@
+/* TripDetailsStyle.css */
+
+.trip-details {
+  max-width: 800px;
+  margin: 120px auto 0;  /* Thêm margin-top để tránh bị che bởi Navbar */
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-family: Arial, sans-serif;  /* Đặt font-family để sửa lỗi font */
+}
+
+.trip-details h1 {
+  font-size: 1.5em;  /* Thu nhỏ kích thước chữ của đoạn introduce */
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.trip-details img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.trip-details h2 {
+  font-size: 1.5em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.trip-details p {
+  font-size: 1em;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.trip-details p:last-child {
+  margin-bottom: 0;
+}
