@@ -1,4 +1,3 @@
-import "./HomeHeroStyles.css";
 
 function HomeHero(props) {
   return (

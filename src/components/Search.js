@@ -40,7 +40,6 @@ export default Search;
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import "./SearchStyle.css"; // Import CSS nếu cần
 
 const Search = ({ onResults }) => {
     const [searchTerm, setSearchTerm] = useState('');

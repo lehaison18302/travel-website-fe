@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./TripStyles.css";
 import TripData from "./TripData";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

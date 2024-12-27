@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../components/ContactFormStyles.css";
 
 function ContactForm() {
   const [name, setName] = useState("");

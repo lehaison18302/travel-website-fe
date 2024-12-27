@@ -1,4 +1,3 @@
-import "../components/AboutUsStyles.css";
 
 function AboutUs() {
   return (

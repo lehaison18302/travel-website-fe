@@ -1,7 +1,7 @@
-import "./SignUp.css";
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
-import { login } from "../apis/userApi"; // Đảm bảo đường dẫn đúng
+import { login } from "../../apis/userApi";
+import signUpImage from "../../assets/images/sign-up.jpg"
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -14,9 +14,9 @@ const Signup = () => {
     try {
       const response = await login(username, password);
       const storedAccessToken = JSON.parse(localStorage.getItem("accessToken")); // Phân tích cú pháp JSON
-      
+
       const isAdmin = storedAccessToken?.isAdmin || false; // Gán giá trị mặc định false nếu không có isAdmin trong response
-  
+
       // Chuyển hướng người dùng dựa trên isAdmin
       if (isAdmin) {
         navigate('/admin');
@@ -28,7 +28,7 @@ const Signup = () => {
       setError('Tên đăng nhập hoặc mật khẩu không đúng');
     }
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -39,29 +39,27 @@ const Signup = () => {
   };
 
   return (
-    <>
-      <div className='form-modal__container'>
-        <div className='form-modal__wrapper'>
-          <div className='sign-up'>
-            <img src='https://png.pngtree.com/thumb_back/fw800/background/20220424/pngtree-web-template-of-computer-login-form-page-application-username-photo-image_30648922.jpg' alt='Camels in the desert'></img>
-          </div>
-          <div className='sign-up__container'>
-            <h2>Sign Up</h2>
-            <form className='sign-up__form' onSubmit={handleSubmit}>
-              <label>Username</label> <br></br>
-              <input type='text' value={username} onChange={(e) => setUsername(e.target.value)} placeholder='...'></input><br></br>
-              <label>Password</label> <br></br>
-              <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='password'></input><br></br>
-              <button type='submit' className='btn-sign'>Sign Up</button>
-            </form>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <div>
-              <p className='have-account'>Have an account? <span>Log In here </span></p>
-            </div>
+    <div className='form-modal__container'>
+      <div className='form-modal__wrapper'>
+        <div className='sign-up'>
+          <img src={signUpImage} alt='Camels in the desert'></img>
+        </div>
+        <div className='sign-up__container'>
+          <h2>Sign Up</h2>
+          <form className='sign-up__form' onSubmit={handleSubmit}>
+            <label>Username</label> <br></br>
+            <input type='text' value={username} onChange={(e) => setUsername(e.target.value)} placeholder='...'></input><br></br>
+            <label>Password</label> <br></br>
+            <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='password'></input><br></br>
+            <button type='submit' className='btn-sign'>Sign Up</button>
+          </form>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <div>
+            <p className='have-account'>Have an account? <span>Log In here </span></p>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

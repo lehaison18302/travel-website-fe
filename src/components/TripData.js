@@ -1,5 +1,4 @@
 import React from "react";
-import "./TripStyles.css";
 
 function TripData({ title, address, rating, image, phoneNumber, website }) {
   return (

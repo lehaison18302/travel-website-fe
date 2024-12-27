@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import "./HotelDetailsStyle.css";
 
 function HotelDetails() {
   const [hotel, setHotel] = useState(null);
