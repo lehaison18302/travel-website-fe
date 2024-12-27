@@ -1,17 +1,15 @@
-/* TripDetailsStyle.css */
-
 .trip-details {
   max-width: 800px;
-  margin: 120px auto 0;  /* Thêm margin-top để tránh bị che bởi Navbar */
+  margin: 120px auto 0; /* Thêm margin-top để tránh bị Navbar che */
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  font-family: Arial, sans-serif;  /* Đặt font-family để sửa lỗi font */
+  font-family: Arial, sans-serif; /* Sử dụng font chung */
 }
 
 .trip-details h1 {
-  font-size: 1.5em;  /* Thu nhỏ kích thước chữ của đoạn introduce */
+  font-size: 1.8em; /* Kích thước lớn */
   margin-bottom: 20px;
   color: #333;
 }
@@ -23,13 +21,6 @@
   margin-bottom: 20px;
 }
 
-.trip-details h2 {
-  font-size: 1.5em;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  color: #555;
-}
-
 .trip-details p {
   font-size: 1em;
   margin-bottom: 10px;
@@ -38,4 +29,76 @@
 
 .trip-details p:last-child {
   margin-bottom: 0;
+}
+
+.trip-details a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s ease-in-out;
+}
+
+.trip-details a:hover {
+  color: #e74c3c;
+  text-decoration: underline;
+}
+
+.comments-section {
+  margin-top: 30px;
+}
+
+.comments-list {
+  margin-bottom: 20px;
+}
+
+.comment-item {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.comment-item strong {
+  color: #333;
+}
+
+.new-comment {
+  margin-top: 20px;
+}
+
+.new-comment textarea {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+}
+
+.new-comment button {
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.new-comment button:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive thiết bị nhỏ */
+@media screen and (max-width: 600px) {
+  .trip-details {
+      padding: 15px;
+  }
+
+  .trip-details h1 {
+      font-size: 1.5em;
+  }
+
+  .new-comment textarea {
+      height: 60px;
+  }
 }

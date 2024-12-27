@@ -15,6 +15,7 @@ function Trip() {
     axios.get('http://localhost:3000/trips')
       .then(response => {
         const data = response.data;
+        console.log(data);
         if (Array.isArray(data)) {
           setTrips(data);
         } else {
@@ -26,15 +27,9 @@ function Trip() {
       });
   }, []);
 
+
   const handleTripClick = (id) => {
-    axios.get(`http://localhost:3000/tripsID/${id}`)
-      .then(response => {
-        console.log('ID posted successfully:', response.data);
-        navigate(`/tripsID`, { state: { tripDetails: response.data } });
-      })
-      .catch(error => {
-        console.error('Error posting ID:', error);
-      });
+    navigate(`/tripID`, { state: { id } });
   };
   
 
@@ -58,7 +53,6 @@ function Trip() {
   return (
     <div className="trip">
       <h1>Điểm đến gợi ý</h1>
-      <p>Các lộ trình du lịch mà bạn có thể thoải mái lựa chọn</p>
       <Slider {...settings}>
         {Array.isArray(trips) && trips.map((trip, index) => (
           <div 
@@ -68,13 +62,18 @@ function Trip() {
           >
             <TripData
               image={trip.image}
-              heading={trip.heading}
-              text={trip.text}
+              title={trip.title}
+              address={trip.address}
+              rating={trip.rating}
+              phoneNumber={trip.phoneNumber}
+              website={trip.website}
             />
+
           </div>
         ))}
       </Slider>
     </div>
+    
   );
 }
 

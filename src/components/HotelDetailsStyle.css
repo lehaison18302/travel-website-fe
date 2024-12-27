@@ -1,0 +1,90 @@
+.hotel-details {
+    max-width: 800px;
+    margin: 120px auto 0; /* Thêm margin-top để tránh bị Navbar che */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: Arial, sans-serif; /* Sử dụng font chung */
+  }
+  
+  .hotel-details h1 {
+    font-size: 1.8em; /* Kích thước lớn hơn TripDetails */
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .hotel-details img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .hotel-details p {
+    font-size: 1em;
+    margin-bottom: 10px;
+    color: #666;
+  }
+  
+  .hotel-details p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .hotel-details a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .hotel-details a:hover {
+    color: #e74c3c;
+    text-decoration: underline;
+  }
+  
+  .comments-section {
+    margin-top: 30px;
+  }
+  
+  .comments-list {
+    margin-bottom: 20px;
+  }
+  
+  .comment-item {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .new-comment {
+    margin-top: 20px;
+  }
+  
+  .new-comment textarea {
+    width: 100%;
+    height: 80px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .new-comment .rating span {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+  
+  .new-comment button {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .new-comment button:hover {
+    background-color: #2980b9;
+  }
+  

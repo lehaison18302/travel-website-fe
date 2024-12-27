@@ -1,22 +1,25 @@
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
 .hero {
   width: 100%;
   height: 100vh;
   position: relative;
+  overflow: hidden; /* Đảm bảo video không bị tràn */
 }
+
 .hero-mid {
   width: 100%;
   height: 70vh;
   position: relative;
-}
-
-.hero-mid h1 {
-  padding-top: 4rem !important;
-}
-
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  overflow: hidden; /* Đảm bảo video không bị tràn */
 }
 
 .hero-text {
@@ -25,6 +28,8 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
+  text-align: center; /* Canh giữa text */
+  z-index: 1; /* Đảm bảo text hiển thị trên video */
 }
 
 .hero-text h1 {

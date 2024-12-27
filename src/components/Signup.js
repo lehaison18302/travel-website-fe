@@ -6,21 +6,29 @@ import { login } from "../apis/userApi"; // Đảm bảo đường dẫn đúng
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isAdmin, setIsAdmin] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (username, password) => {
     try {
-      await login(username, password);
-      // Chuyển hướng người dùng về trang home sau khi đăng nhập thành công
-      navigate('/home');
+      const response = await login(username, password);
+      const storedAccessToken = JSON.parse(localStorage.getItem("accessToken")); // Phân tích cú pháp JSON
+      
+      const isAdmin = storedAccessToken?.isAdmin || false; // Gán giá trị mặc định false nếu không có isAdmin trong response
+  
+      // Chuyển hướng người dùng dựa trên isAdmin
+      if (isAdmin) {
+        navigate('/admin');
+      } else {
+        navigate('/home');
+      }
     } catch (error) {
       console.error('Lỗi khi đăng nhập:', error.response?.data?.error);
-      // Xử lý lỗi đăng nhập
       setError('Tên đăng nhập hoặc mật khẩu không đúng');
     }
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

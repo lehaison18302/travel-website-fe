@@ -1,0 +1,18 @@
+.contact-admin {
+  text-align: center;
+  padding: 100px 20px 50px; /* Thêm khoảng trống ở trên và dưới để tránh bị che */
+  margin-top: 100px; /* Tạo khoảng cách từ Navbar xuống ContactAdmin */
+  min-height: calc(100vh - 180px); /* Điều chỉnh chiều cao tối thiểu để vừa vặn với màn hình, trừ đi chiều cao của Navbar và Footer */
+  box-sizing: border-box;
+}
+
+.contact-admin ul {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-admin li {
+  margin: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+}

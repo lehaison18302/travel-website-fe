@@ -6,6 +6,8 @@ import Service from "./routes/Service";
 import Contact from "./routes/Contact";
 import SignUp from "./routes/SignUp";
 import TripDetail from "./routes/TripDetail";
+import HotelDetail from "./routes/HotelDetail";
+import SearchPage from "./routes/Search"
 import Admin from "./routes/Admin";
 import Feedback from "./routes/Feedback";
 import { Route, Routes } from "react-router-dom";
@@ -19,10 +21,12 @@ function App() {
           <Route path="/" element={<SignUp />} />
           <Route>
             <Route path="/home" element={<Home />} />
-            <Route path="/tripsID" element={<TripDetail />} />
+            <Route path="/tripID" element={<TripDetail />} />
+            <Route path="/hotelID" element={<HotelDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/service" element={<Service />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/search" element={<SearchPage />} />
           </Route>
           <Route>
             <Route path="/admin" element={<Admin />} />

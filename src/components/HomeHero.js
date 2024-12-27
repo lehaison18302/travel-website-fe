@@ -4,7 +4,8 @@ function HomeHero(props) {
   return (
     <>
       <div className={props.cName}>
-        <img src={props.heroImg} alt="heroImg" />
+        {/* Thay img bằng video */}
+        <video className="hero-video" src={props.heroVideo} autoPlay loop muted />
         <div className="hero-text">
           <h1>{props.title}</h1>
           <p>{props.text}</p>
@@ -12,9 +13,6 @@ function HomeHero(props) {
             {props.buttonText}
           </a>
         </div>
-        {/* <h1>Your Journey Your Story</h1>
-        <p>Choose Your Favourite Destination.</p>
-        <a href="index.html">Travel Plan</a> */}
       </div>
     </>
   );
