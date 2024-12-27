@@ -1,11 +1,11 @@
 import Footer from "../components/Footer";
-import Signup from "../components/Signup";
-
+import Signup from "../components/LogIn/Signup";
+import Login from "src/components/LogIn/Login";
 function SignUp() {
   return (
     <>
-    <Signup />
-    <Footer />
+      <Login />
+      {/* <Footer /> */}
     </>
   );
 }

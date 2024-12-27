@@ -1,5 +1,4 @@
 import React from 'react';
-import "./SearchResultStyle.css";
 
 const SearchResult = ({ results }) => {
     return (

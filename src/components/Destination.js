@@ -1,8 +1,8 @@
 import React from "react";
-import langbac from "../assets/langbac.jpg";
-import langbac2 from "../assets/langbac2.jpg";
-import phoco2 from "../assets/phoco2.jpg";
-import phoco3 from "../assets/phoco3.jpg";
+import langbac from "../assets/images/langbac.jpg";
+import langbac2 from "../assets/images/langbac2.jpg";
+import phoco2 from "../assets/images/phoco2.jpg";
+import phoco3 from "../assets/images/phoco3.jpg";
 import DestinationData from "./DestinationData";
 
 const Destination = () => {

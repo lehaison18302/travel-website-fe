@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-import "../components/ContactAdminStyle.css";
 
 function ContactAdmin() {
     const [contacts, setContacts] = useState([]);
