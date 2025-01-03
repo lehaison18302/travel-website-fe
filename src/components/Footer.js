@@ -4,7 +4,7 @@ const Footer = () => {
     <>
       <div className="footer">
         <div className="top">
-          <div>
+          <div className="flex" style={{alignItems:'baseline', gap:16}}>
             <h1>Travel</h1>
             <p>Hãy khám phá Hà Nội ngay nào.</p>
           </div>
@@ -21,7 +21,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="bottom">
+        {/* <div className="bottom">
           <div>
             <h4>Project</h4>
           </div>
@@ -40,7 +40,7 @@ const Footer = () => {
             <h4>Others</h4>
             <a href="https://fontawesome.com/">License</a>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -1,5 +1,5 @@
 import Api from "./baseApi";
-import SignUp from "src/routes/SignUp";
+import SignUp from "src/Layout/SignUp";
 import { useState } from "react";
 
 

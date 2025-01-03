@@ -4,11 +4,11 @@ import ContactAdmin from "src/components/ContactAdmin";
 
 function Admin() {
     return(
-        <>
-            <Navbar />
+        <div className="main-layout">
             <ContactAdmin />
             <Footer />
-        </>
+            <Navbar />
+        </div>
     );
 }
 

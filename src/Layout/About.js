@@ -6,17 +6,11 @@ import AboutImg from "../assets/images/night.jpg";
 
 function About() {
   return (
-    <>
-      <Navbar />
-      <HomeHero
-        cName="hero-mid"
-        heroImg={AboutImg}
-        title="About"
-        btnClass="hide"
-      />
+    <div className="main-layout">
       <AboutUs />
       <Footer />
-    </>
+      <Navbar />
+    </div>
   );
 }
 

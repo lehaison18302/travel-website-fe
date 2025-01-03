@@ -6,7 +6,7 @@ import Trip from "../components/Trip";
 
 function Service() {
   return (
-    <>
+    <div className="main-layout">
       <Navbar />
       <HomeHero
         cName="hero-mid"
@@ -16,7 +16,7 @@ function Service() {
       />
       <Trip />
       <Footer />
-    </>
+    </div>
   );
 }
 

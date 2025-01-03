@@ -6,17 +6,11 @@ import Footer from "../components/Footer";
 
 function Contact() {
   return (
-    <>
-      <Navbar />
-      <HomeHero
-        cName="hero-mid"
-        heroImg={AboutImg}
-        title="Contact"
-        btnClass="hide"
-      />
+    <div className="main-layout">
       <ContactForm />
       <Footer />
-    </>
+      <Navbar />
+    </div>
   );
 }
 

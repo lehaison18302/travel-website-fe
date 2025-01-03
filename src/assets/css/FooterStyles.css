@@ -63,9 +63,9 @@
 */
 
 .footer {
-  background: #000;
+  background: rgba(28,41,48,1.00);
   color: #fff;
-  padding: 2.67rem 4rem; /* Reduced padding to lower height */
+  padding: 8px 40px; /* Reduced padding to lower height */
 }
 
 .top {
@@ -78,7 +78,7 @@
 .top i {
   color: #fff;
   font-size: 2rem;
-  margin-left: 1rem;
+  margin-left: 8px;
 }
 
 .top i:hover {
@@ -86,7 +86,7 @@
 }
 
 .bottom {
-  padding-top: 1.33rem; /* Adjusted padding to align with height reduction */
+  padding-top: 8px; /* Adjusted padding to align with height reduction */
   text-align: start;
   display: flex;
   justify-content: space-between;
@@ -106,7 +106,7 @@
 .bottom a {
   text-decoration: none;
   color: #fafafa;
-  padding-bottom: 0.27rem; /* Reduced padding */
+  padding-bottom: 4px; /* Reduced padding */
   font-size: 1.1rem;
 }
 
