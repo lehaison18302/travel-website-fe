@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   AudioOutlined,
@@ -8,6 +8,7 @@ import {
 } from "@ant-design/icons";
 import { AutoComplete, Avatar, Card, Input, Rate, Tooltip } from "antd";
 import Login from "./LogIn/Login";
+import CardUser from "./LogIn/CardUser";
 const { Search } = Input;
 const resultFake = [
   {
@@ -27,9 +28,23 @@ const resultFake = [
 ];
 const Navbar = () => {
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [resultSearch, setResult] = useState([]);
   const [searchText, setSearchText] = useState("");
+  useEffect(() => {
+    const account = localStorage.getItem("account");
+    setIsLogin(!!account);
+
+    const handleStorageChange = () => {
+      const account = localStorage.getItem("account");
+      setIsLogin(!!account);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
   const suffix = (
     <AudioOutlined
       style={{
@@ -74,6 +89,10 @@ const Navbar = () => {
   const onSelect = (arg) => {
     console.log(arg);
   };
+  const logout = () => {
+    localStorage.removeItem("account");
+    setIsLogin(false);
+  };
   return (
     <nav className="NavbarItems">
       <div className="navbar-logo" onClick={() => navigate("/home")}>
@@ -86,7 +105,6 @@ const Navbar = () => {
           onSearch={(text) => onSearch(text)}
           style={{ width: 400 }}
           popupMatchSelectWidth={252}
-          size="large"
         >
           <Input.Search placeholder="Bạn muốn đi đến đâu?" enterButton />
         </AutoComplete>
@@ -115,7 +133,7 @@ const Navbar = () => {
           </Link>
         </li>
       </ul>
-      <Login />
+      {isLogin ? <CardUser logout={logout}></CardUser> : <Login setLogin={setIsLogin}  />}
     </nav>
   );
 };

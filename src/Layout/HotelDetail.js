@@ -4,11 +4,11 @@ import Footer from "../components/Footer";
 
 function HotelDetail() {
     return(
-        <>
-            <Navbar />
+        <div className="main-layout">
             <HotelDetails />
             <Footer />
-        </>
+            <Navbar />
+        </div>
     )
 }
 

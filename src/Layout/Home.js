@@ -10,8 +10,7 @@ import homeVideo from "src/assets/images/home.mp4";
 
 function Home() {
   return (
-    <>
-      <Navbar />
+    <div className="main-layout">
       <HomeHero
         cName="hero"
         heroVideo={homeVideo}
@@ -25,7 +24,8 @@ function Home() {
       <Hotels />
       <Restaurants />
       <Footer />
-    </>
+      <Navbar />
+    </div>
   );
 }
 
