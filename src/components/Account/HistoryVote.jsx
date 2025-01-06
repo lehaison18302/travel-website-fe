@@ -233,7 +233,7 @@ const HistoryVote = () => {
             </Tooltip>
           </div>
           <span style={{ fontSize: 16 }}>
-            <span style={{ fontWeight: 600 }}>Bình luận: </span>
+            <span style={{ fontWeight: 600 }}>Địa chỉ: </span>
             <span style={{ fontStyle: "italic" }}>{item.address}</span>
           </span>
           <span style={{ fontSize: 16 }}>
