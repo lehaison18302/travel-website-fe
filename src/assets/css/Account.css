@@ -1,36 +1,75 @@
-.account-infor-container{
-    width: 1080px;
-    margin-top: 24px;
-    margin-bottom: 64px;
-    -webkit-box-flex: 1;
-    -webkit-flex-grow: 1;
-    flex-grow: 1;
-    align-self: center;
-    -webkit-box-pack: justify;
-    -webkit-box-direction: normal;
-    -webkit-box-orient: horizontal;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    display: grid;
+.account-infor-container {
+  width: 1080px;
+  margin-top: 24px;
+  margin-bottom: 64px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  align-self: center;
+  -webkit-box-pack: justify;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  display: grid;
 }
-.account-info-menu{
-    margin-top: 32px;
-    border: 1px solid #0958d9 ;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-
+.account-info-menu {
+  margin-top: 32px;
+  border: 1px solid #0958d9;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
-.account-info-setting{
-
+.item-vote-name {
+  display: flex;
 }
 
-.account-info-card{
-    display: flex;
+.account-info-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right: 24px;
+  gap: 8px;
+  padding-top: 16px;
+}
+
+.item-vote-img {
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  margin: 4px 12px;
+}
+
+.item-vote {
+  display: flex;
+  width: 100%;
+}
+
+.item-vote-text {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.list-item-vote {
+  width: 100%;
+}
+.item-vote-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 16px;
 }
