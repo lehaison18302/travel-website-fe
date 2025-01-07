@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   AudioOutlined,
+  InfoCircleOutlined,
   PhoneOutlined,
   RiseOutlined,
   StarOutlined
@@ -115,15 +116,15 @@ const Navbar = () => {
 
       <ul className={clicked ? "nav-menu active" : "nav-menu"}>
         <li key={0}>
-          <Link className={"nav-links"} to={"/about"}>
+          <Link className={"nav-links"} to={"/search"}>
             <RiseOutlined />
             Xu hướng
           </Link>
         </li>
         <li key={1}>
           <Link className={"nav-links"} to={"/about"}>
-            <StarOutlined />
-            Đánh giá
+            <InfoCircleOutlined />
+            Thông tin
           </Link>
         </li>
         <li key={2}>

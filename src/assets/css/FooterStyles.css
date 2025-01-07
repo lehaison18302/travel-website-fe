@@ -65,8 +65,9 @@
 .footer {
   background: rgba(28,41,48,1.00);
   color: #fff;
-  padding: 8px 40px; /* Reduced padding to lower height */
-}
+  padding: 8px 40px; 
+  z-index: 100;
+  }
 
 .top {
   display: flex;

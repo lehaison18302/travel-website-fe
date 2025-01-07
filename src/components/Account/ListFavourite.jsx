@@ -197,7 +197,7 @@ const listVoteFake = [
   }
 ];
 
-const HistoryVote = () => {
+const ListFav = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
 
@@ -252,17 +252,11 @@ const HistoryVote = () => {
           </div>
           <span style={{ fontSize: 16 }}>
             <span style={{ fontWeight: 600 }}>Địa chỉ: </span>
-            <span style={{ fontStyle: "italic" }}>{item.address}</span>
+            <span>{item.address}</span>
           </span>
           <span style={{ fontSize: 16 }}>
-            <span style={{ fontWeight: 600 }}>Bình luận: </span>
-            <span style={{ fontStyle: "italic" }}>{item.comment}</span>
-          </span>
-          <span style={{ fontSize: 16 }}>
-            <span style={{ fontWeight: 600 }}>Ngày bình luận: </span>
-            <span style={{ fontStyle: "italic" }}>
-              {formatDate(randomCommentDate)}
-            </span>
+            {/* <span style={{ fontWeight: 600 }}>Thông tin:  </span> */}
+            <span style={{ fontStyle: "italic" }}>{item.des}</span>
           </span>
         </div>
       </div>
@@ -296,4 +290,4 @@ const HistoryVote = () => {
   );
 };
 
-export default HistoryVote;
+export default ListFav;

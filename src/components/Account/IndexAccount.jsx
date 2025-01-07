@@ -3,6 +3,7 @@ import { useState } from "react";
 import { listAVT } from "src/constants/ListAvatar";
 import Information from "./Information";
 import HistoryVote from "./HistoryVote";
+import ListFav from "./ListFavourite";
 
 const listMenu = [
   {
@@ -21,7 +22,7 @@ const listMenu = [
     id: 2,
     key: 2,
     label: <strong>Địa điểm yêu thích</strong>,
-    children: <>list địa điểm</>
+    children: <ListFav/>
   }
 ];
 

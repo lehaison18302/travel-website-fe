@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "src/components/Navbar";
-import Search from "src/components/Search";
+import Search from "src/components/Search/Search";
 import SearchResult from "src/components/SearchResult";
 import Footer from "src/components/Footer";
 
@@ -9,10 +9,11 @@ const SearchPage = () => {
 
   return (
     <div className="main-layout">
-      <Navbar />
-      <Search onResults={(data) => setResults(data)} />
-      <SearchResult results={results} />
+      {/* <Search onResults={(data) => setResults(data)} /> */}
+      {/* <SearchResult results={results} /> */}
+      <Search />
       <Footer />
+      <Navbar />
     </div>
   );
 };
