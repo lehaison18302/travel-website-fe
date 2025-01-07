@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   AudioOutlined,
+  EnvironmentOutlined,
   InfoCircleOutlined,
   PhoneOutlined,
   RiseOutlined,
@@ -116,9 +117,9 @@ const Navbar = () => {
 
       <ul className={clicked ? "nav-menu active" : "nav-menu"}>
         <li key={0}>
-          <Link className={"nav-links"} to={"/search"}>
-            <RiseOutlined />
-            Xu hướng
+          <Link className={"nav-links"} to={"/destination"}>
+            <EnvironmentOutlined />
+            Điểm đến
           </Link>
         </li>
         <li key={1}>

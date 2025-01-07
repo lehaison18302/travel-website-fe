@@ -1,10 +1,12 @@
 import {
   CrownOutlined,
+  HeartFilled,
+  HeartOutlined,
   StarFilled,
   StarOutlined,
   TrophyOutlined
 } from "@ant-design/icons";
-import { Table } from "antd";
+import { Input, List, Pagination, Rate, Table, Tooltip } from "antd";
 import { useState } from "react";
 
 const dataFake = [
@@ -90,12 +92,12 @@ const renderRankingIcon = (tier) => {
       );
     default:
       return (
-        <strongh
+        <strong
           className="flex jusCen"
           style={{ fontSize: 24, color: "gray" }}
         >
           {tier}
-        </strongh>
+        </strong>
       );
   }
 };
@@ -121,15 +123,64 @@ const columns = [
     )
   }
 ];
-function Search() {
-  const [listPlace, setListPlace] = useState(
+function Destination() {
+  const [ranking, setRanking] = useState(
     dataFake.slice(0, 5).map((item, index) => {
       return { ...item, tier: index + 1 };
     })
   );
+  const [listPlace, setListPlace] = useState(dataFake);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(5);
+  const startIndex = (currentPage - 1) * pageSize;
+  const currentData = listPlace.slice(startIndex, startIndex + pageSize);
+  const onPageChange = (page, size) => {
+    setCurrentPage(page);
+    setPageSize(size);
+  };
+
+  const itemPlaceInfo = (item) => {
+
+    return (
+      <div className="item-vote">
+        <img
+          className="item-vote-img"
+          src={item.img}
+          alt={`Hình ảnh của ${item.name}`}
+          style={{ width: 100, height: 100, objectFit: "cover" }}
+        />
+        <div className="item-vote-text">
+          <div className="item-vote-name">
+            <strong style={{ fontSize: 20 }}>{item.name} </strong>
+            <div>
+              {item.isLiked ? (
+                <HeartFilled
+                  style={{ color: "red", marginRight: 8, fontSize: 18 }}
+                />
+              ) : (
+                <HeartOutlined style={{ marginRight: 8, fontSize: 18 }} />
+              )}
+              <Tooltip title={`${item.vote} sao`} color="#1677ff">
+                <Rate allowHalf disabled value={item.vote} />
+              </Tooltip>
+            </div>
+          </div>
+          <span style={{ fontSize: 16 }}>
+            <span style={{ fontWeight: 600 }}>Địa chỉ: </span>
+            <span style={{ fontStyle: "italic" }}>{item.address}</span>
+          </span>
+          <span style={{ fontSize: 16 }}>
+            <span style={{ fontWeight: 600 }}>Chi tiết: </span>
+            <span style={{ fontStyle: "italic" }}>{item.des}</span>
+          </span>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="search-layout flex jusCen">
-      <div className="search-container">
+      <div className="search-container flex">
         <div className="search-left">
           <span
             className="flex jusCen"
@@ -138,16 +189,40 @@ function Search() {
             Bảng xếp hạng tuần
           </span>
           <Table
-            dataSource={listPlace}
+            dataSource={ranking}
             showHeader={false}
             columns={columns}
             pagination={false}
           />
         </div>
-        <div className="search-right"></div>
+        <div className="search-right">
+          <span
+            className="flex jusCen"
+            style={{ fontSize: 24, fontWeight: 600, margin: 8 }}
+          >
+            Danh sách địa điểm đề xuất
+          </span>
+          <Input.Search placeholder="Tìm kiếm theo tên địa điểm" enterButton />
+          <div
+            style={{ height: 1, border: "1px solid #1677ff", width: "100%", marginTop:8 }}
+          ></div>
+          <List
+            dataSource={currentData}
+            renderItem={(item) => (
+              <List.Item style={{ width: "100%" }}>{itemPlaceInfo(item)}</List.Item>
+            )}
+          />
+          <Pagination
+            current={currentPage}
+            total={listPlace.length}
+            pageSize={pageSize}
+            showSizeChanger
+            onChange={onPageChange}
+          />
+        </div>
       </div>
     </div>
   );
 }
 
-export default Search;
+export default Destination;

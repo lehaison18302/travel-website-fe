@@ -6,7 +6,7 @@ import Service from "./Layout/Service";
 import Contact from "./Layout/Contact";
 import TripDetail from "./Layout/TripDetail";
 import HotelDetail from "./Layout/HotelDetail";
-import SearchPage from "./Layout/Search";
+import SearchPage from "./Layout/PlacePage";
 import Admin from "./Layout/Admin";
 import Feedback from "./Layout/Feedback";
 import { Route, Routes } from "react-router-dom";
@@ -24,7 +24,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/service" element={<Service />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/search" element={<SearchPage />} />{" "}
+          <Route path="/destination" element={<SearchPage />} />{" "}
           <Route path="/account" element={<Account />} />
         </Route>
         <Route>
