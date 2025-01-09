@@ -1,6 +1,6 @@
 import { Alert, Avatar, Button, Form, Input } from "antd";
 import { useState } from "react";
-import { listAVT } from "src/constants/ListAvatar";
+import { listAVT } from "src/constants/constant";
 
 const Information = () => {
   const [email, setEmail] = useState("");

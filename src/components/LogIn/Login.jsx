@@ -112,11 +112,10 @@ const Login = ({setLogin}) => {
           layout="vertical"
         >
           <Form.Item
-            label="Email"
-            name="email"
+            label="Tên đăng nhập"
+            name="username"
             rules={[
-              { required: true, message: "Vui lòng nhập email!" },
-              { type: "email", message: "Email không hợp lệ!" }
+              { required: true, message: "Vui lòng nhập tên tài khoản!" },
             ]}
           >
             <Input onChange={(e) => setUsername(e.target.value)} />
