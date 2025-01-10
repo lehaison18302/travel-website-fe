@@ -95,6 +95,7 @@ function Destination() {
       .slice(0, 5)
       .map((item, index) => ({ ...item, tier: index + 1 }))
   );
+  const [showComment, setShowComment] = useState(false);
   const [currentItem, setCurrentItem] = useState(dataDiaDiemFake[0]);
   const [listPlace, setListPlace] = useState(dataDiaDiemFake);
   const [currentPage, setCurrentPage] = useState(1);
@@ -231,11 +232,10 @@ function Destination() {
               <span style={{ fontWeight: 600 }}>Địa chỉ: </span>
               <span style={{ fontStyle: "italic" }}>{currentItem.address}</span>
             </div>
-            <div style={{ fontSize: 16 }}>
-              <span style={{ fontWeight: 600 }}>Chi tiết: </span>
-              <span style={{ fontStyle: "italic" }}>{currentItem.des}</span>
-            </div>
           </div>
+        </div>
+        <div class="detail-des-info">
+          <p>{currentItem.des}</p>
         </div>
         <div style={{ width: "100%" }}>
           <Button.Group size="large" style={{ width: "100%" }}>
@@ -251,6 +251,7 @@ function Destination() {
             ></Button>
             <Button
               style={{ width: "100%", height: 32 }}
+              onClick={() => setShowComment(!showComment)}
               icon={<CommentOutlined />}
             ></Button>
             <Button
@@ -272,7 +273,6 @@ function Destination() {
               placeholder="Nhập bình luận..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              onPressEnter={handleSend}
               style={{ flex: 1, minHeight: 40 }}
               addonAfter={
                 <Rate
@@ -296,7 +296,7 @@ function Destination() {
             margin: "12px 0"
           }}
         ></div>
-        <CommentList comments={dataCommentFake} />
+        <CommentList visible={showComment} comments={dataCommentFake} />
       </Drawer>
     </div>
   );

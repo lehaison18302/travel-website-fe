@@ -4,9 +4,10 @@ import { LikeOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
 
-const CommentList = ({ comments }) => {
+const CommentList = ({ comments, visible }) => {
   return (
     <List
+      className={`comment-list ${visible ? "fade-in" : "fade-out"}`}
       itemLayout="vertical"
       dataSource={comments}
       renderItem={(item) => (
@@ -26,7 +27,7 @@ const CommentList = ({ comments }) => {
             <Text type="secondary">{item.commentTime}</Text>
           </div>
           <div>
-            <Rate disabled  value={item.rating} allowHalf />
+            <Rate disabled value={item.rating} allowHalf />
           </div>
           <div style={{ marginTop: 8 }}>
             <Text>{item.comment}</Text>
