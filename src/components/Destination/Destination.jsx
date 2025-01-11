@@ -21,11 +21,12 @@ import {
   Table,
   Tooltip
 } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { optionSelectSearch } from "src/constants/constant";
 import { dataDiaDiemFake, dataCommentFake } from "src/constants/constant";
 import CommentList from "./CommentList";
 import { ItemPlaceInfo } from "./ItemPlaceInfo";
+import { getSuggestLocation } from "src/apis/functionApi";
 
 // Helper function to render ranking icons
 const renderRankingIcon = (tier) => {
@@ -104,10 +105,24 @@ function Destination() {
 
   const startIndex = (currentPage - 1) * pageSize;
   const currentData = listPlace.slice(startIndex, startIndex + pageSize);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getSuggestLocation();
+        setListPlace(data)
+        console.log(data);
 
+      } catch (err) {
+        setError("Lỗi khi tải dữ liệu gợi ý.");
+        console.error(err);
+      }
+    };
+
+    fetchData();
+  }, []);
   const handleSend = () => {
     if (message.trim() && rating > 0) {
-      alert("Comment added!"); // Replace with actual logic
+      alert("Comment added!");
       setMessage("");
       setRating(0);
     } else {

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { Button, message, Rate } from "antd";
+import { addFavLocation, submitVoteLocation } from "src/apis/functionApi";
+import { HeartOutlined } from "@ant-design/icons";
 
 function TripDetails() {
   const [trip, setTrip] = useState(null);
@@ -38,9 +41,36 @@ function TripDetails() {
     }
   }, [id]);
 
+  const handleSubmitRate = (value) => {
+    try {
+      let data = {
+        id: id,
+        user_id: userId,
+        ratingScore: value
+      }
+      submitVoteLocation(data).then(() => {
+        message.success("Lưu đánh giá thành công")
+      })
+    } catch (error) {
+      message.error(error.message)
+    }
+  }
+  const handleAddFav = () => {
+    try {
+      let data = {
+        location_id: id,
+        user_id: userId,
+      }
+      addFavLocation(data).then(() => {
+        message.success("Lưu đánh giá thành công")
+      })
+    } catch (error) {
+      message.error(error.message)
+    }
+  }
   // Submit a new comment
   const handleCommentSubmit = () => {
-    if (!accessToken || !userId) {
+    if (!accessToken || !userId) {  //anh ơi cái thông tin người dùng của phiên đăng nhập lưu ở account chứ không lưu ở accessToken anh ới
       alert("Bạn cần đăng nhập để bình luận.");
       return;
     }
@@ -76,18 +106,24 @@ function TripDetails() {
 
   return (
     <div className="trip-details">
-      <h1>{trip.title}</h1>
+      <div className="flex" style={{ justifyContent: 'space-between' }}>
+        <h1>{trip.title}</h1>
+        <Button onClick={() => handleAddFav()} icon={<HeartOutlined />} />
+      </div>
       <img src={trip.image} alt={trip.title} />
       <p>Địa chỉ: {trip.address}</p>
       <p>Đánh giá: {trip.rating}</p>
       <p>Loại hình: {trip.category}</p>
       <p>Website: <a href={trip.website}>{trip.website}</a></p>
+      <div className="comments-section">
+        <h2>Đánh giá</h2>
+        <Rate defaultValue={5} style={{ marginTop: 8 }} allowHalf onChange={handleSubmitRate} />
+      </div>
 
       <div className="comments-section">
         <h2>Bình luận</h2>
-        
-        {/* Display Comments */}
-        <div className="comments-list">
+
+        <div style={{ marginTop: 8 }} className="comments-list">
           {comments.map((comment) => (
             <div key={comment.comment_id} className="comment-item">
               <p><strong>{comment.user_display_name}</strong></p>
