@@ -54,6 +54,32 @@
   right: 0;
 }
 
+.highlight-text {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 8px;
+  text-align: center;
+  display: inline-block;
+  animation: highlight-blink 2s infinite;
+  transition: all 0.3s ease;
+}
+.comment-list-container{
+  max-height: 360px;
+  overflow: auto;
+}
+
+@keyframes highlight-blink {
+  0%,
+  100% {
+    background-color: transparent;
+    color: black;
+  }
+  50% {
+    background-color: linear-gradient(to right, yellow, orange);
+    color: #1677ff;
+  }
+}
+
 @media screen and (max-width: 850px) {
   .destination {
     margin: 4rem 2rem;

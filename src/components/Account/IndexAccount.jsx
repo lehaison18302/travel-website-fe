@@ -1,6 +1,6 @@
 import { Avatar, Card, Tabs } from "antd";
 import { useState } from "react";
-import { listAVT } from "src/constants/ListAvatar";
+import { listAVT } from "src/constants/constant";
 import Information from "./Information";
 import HistoryVote from "./HistoryVote";
 import ListFav from "./ListFavourite";
