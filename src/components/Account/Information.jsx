@@ -3,10 +3,10 @@ import { useState } from "react";
 import { listAVT } from "src/constants/constant";
 
 const Information = () => {
+  const [displayName, setDisplayName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNum, setPhoneNum] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [firstName, setFirstName] = useState("");
+  const [password, setPassword] = useState("");
   const handleSaveInfo = () => {
     console.log("save");
   };
@@ -40,11 +40,11 @@ const Information = () => {
           style={{ justifyContent: "center", fontSize: 18, margin: 8 }}
           className="flex"
         >
-          Thông tin tài khoản
+          Thông tin cá nhân
         </strong>
         <Form.Item
-          label="Email"
-          name="email0"
+          label="Họ tên"
+          name="displayName"
           rules={[{ type: "email", message: "Email không hợp lệ!" }]}
         >
           <Input disabled />
@@ -53,15 +53,14 @@ const Information = () => {
           style={{ justifyContent: "center", fontSize: 18, margin: 8 }}
           className="flex"
         >
-          Thông tin cá nhân
         </strong>
-        <Form.Item label="Họ" name="firstName">
+        <Form.Item label="Username" name="userName">
           <Input onChange={(e) => setFirstName(e.target.value)} />
         </Form.Item>
-        <Form.Item label="Tên" name="firstName">
+        <Form.Item label="Email" name="email">
           <Input onChange={(e) => setFirstName(e.target.value)} />
         </Form.Item>
-        <Form.Item label="Số điện thoại" name="firstName">
+        <Form.Item label="Password" name="password">
           <Input onChange={(e) => setFirstName(e.target.value)} />
         </Form.Item>
         <Form.Item label=" ">
