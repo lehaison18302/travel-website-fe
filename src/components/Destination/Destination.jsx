@@ -26,7 +26,7 @@ import { optionSelectSearch } from "src/constants/constant";
 import { dataDiaDiemFake, dataCommentFake } from "src/constants/constant";
 import CommentList from "./CommentList";
 import { ItemPlaceInfo } from "./ItemPlaceInfo";
-import { getSuggestLocation } from "src/apis/functionApi";
+import apiCommon from "src/apis/functionApi";
 
 // Helper function to render ranking icons
 const renderRankingIcon = (tier) => {
@@ -109,12 +109,11 @@ function Destination() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getSuggestLocation();
+        const data = await apiCommon.getSuggestLocation();
         setListPlace(data)
         console.log(data);
 
       } catch (err) {
-        setError("Lỗi khi tải dữ liệu gợi ý.");
         console.error(err);
       }
     };

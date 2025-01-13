@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Button, message, Rate } from "antd";
-import { addFavLocation, submitVoteLocation } from "src/apis/functionApi";
+import apiCommon, { addFavLocation, submitVoteLocation } from "src/apis/functionApi";
 import { HeartOutlined } from "@ant-design/icons";
 
 function TripDetails() {
@@ -48,7 +48,7 @@ function TripDetails() {
         user_id: userId,
         ratingScore: value
       }
-      submitVoteLocation(data).then(() => {
+      apiCommon.submitVoteLocation(data).then(() => {
         message.success("Lưu đánh giá thành công")
       })
     } catch (error) {
@@ -61,7 +61,7 @@ function TripDetails() {
         location_id: id,
         user_id: userId,
       }
-      addFavLocation(data).then(() => {
+      apiCommon.addFavLocation(data).then(() => {
         message.success("Lưu đánh giá thành công")
       })
     } catch (error) {
