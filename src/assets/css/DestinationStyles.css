@@ -68,6 +68,42 @@
   overflow: auto;
 }
 
+.detail-des-info p {
+  font-size: 18px;
+  line-height: 1.8;
+  text-align: justify;
+  margin: 20px 0;
+  text-indent: 2em; 
+  color: #333;
+  font-family: 'Arial', sans-serif;
+}
+
+.detail-des-info em {
+  font-style: italic;
+  color: #555; 
+}
+
+.detail-des-info strong {
+  font-weight: bold;
+  color: #000; 
+}
+
+.comment-list {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
 @keyframes highlight-blink {
   0%,
   100% {
