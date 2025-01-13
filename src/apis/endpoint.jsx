@@ -15,7 +15,7 @@ const apiEndpoints = {
     favouriteLocation2: `${BASE_URL}/favouriteLocation2`, //(get) api cung cấp 10 khách sạn đã yêu thích
     favouriteLocation3: `${BASE_URL}/favouriteLocation3`, //(get) api cung cấp nhà hàng đã yêu thích
     favouriteDelete: `${BASE_URL}/removeFavourite`, //(delete) api xóa địa điểm yêu thích, client gửi về id cần xóa, nút xóa ở trên từng thẻ địa điểm trong mục danh sách địa điểm đã yêu thích ở phần quản lý tài khoản
-    search: `${BASE_URL}/search`, //(put) client gửi dữ liệu tìm kiếm dạng string về bằng put, server gửi lại mảng các đối tượng trùng khớp dạng json
+    search: `${BASE_URL}/search`, //(post) client gửi dữ liệu tìm kiếm dạng string về bằng put, server gửi lại mảng các đối tượng trùng khớp dạng json
     commentDelete1: `${BASE_URL}/deleteCommentLocation`, //(delete) client gửi id comment cần xóa về server để xóa, nút xóa để ở bên tay phải của từng comment
     commentDelete2: `${BASE_URL}/deleteCommentHotel`, //tương tự
     commentDelete3: `${BASE_URL}/deleteCommentRestaurant`, // tương tự
