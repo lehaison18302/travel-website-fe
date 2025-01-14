@@ -4,11 +4,11 @@ import { destinations } from "src/constants/constant";
 const DestinationData = ({ className, heading, text, img1, img2 }) => {
   return (
     <div className={className}>
-      <div className="text">
+      <div className="des-text">
         <h2>{heading}</h2>
         <p>{text}</p>
       </div>
-      <div className="images">
+      <div className="image">
         <img src={img1} alt={heading} />
         <img src={img2} alt={heading} />
       </div>
