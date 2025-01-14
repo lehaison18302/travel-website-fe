@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-
+import apiCommon from "src/apis/functionApi";
+import { Button, message, Rate } from "antd";
+import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 function HotelDetails() {
   const [hotel, setHotel] = useState(null);
   const [comments, setComments] = useState([]);
@@ -13,13 +15,13 @@ function HotelDetails() {
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const userId = accessToken?.user_id; // Lấy user_id từ localStorage
   const displayName = accessToken?.displayName; // Lấy displayName từ localStorage
-
   // Fetch hotel details and comments
   useEffect(() => {
     if (id) {
       // Fetch hotel details
       axios.get(`http://localhost:3000/hotelID/${id}`)
         .then(response => {
+          response.data = { ...response.data, isLiked: true, }
           setHotel(response.data);
         })
         .catch(error => {
@@ -37,6 +39,34 @@ function HotelDetails() {
     }
   }, [id]);
 
+  const handleAddFav = () => {
+    try {
+      let data = {
+        hotel_id: id,
+        user_id: userId,
+      }
+      apiCommon.addFavHotel(data).then(() => {
+        message.success("Lưu đánh giá thành công")
+      })
+    } catch (error) {
+      message.error(error.message)
+    }
+  }
+
+  const handleSubmitRate = (value) => {
+    try {
+      let data = {
+        id: id,
+        user_id: userId,
+        ratingScore: value
+      }
+      apiCommon.submitVoteHotel(data).then(() => {
+        message.success("Lưu đánh giá thành công")
+      })
+    } catch (error) {
+      message.error(error.message)
+    }
+  }
   // Submit a new comment
   const handleCommentSubmit = () => {
     if (!accessToken || !userId) {
@@ -75,7 +105,10 @@ function HotelDetails() {
 
   return (
     <div className="hotel-details">
-      <h1>{hotel.title}</h1>
+      <div className="flex" style={{ justifyContent: 'space-between' }}>
+        <h1>{hotel.title}</h1>
+        <Button disabled={hotel.isLiked} onClick={() => handleAddFav()} icon={hotel.isLiked ? <HeartFilled style={{ color: 'red' }} /> : <HeartOutlined />} />
+      </div>
       <img src={hotel.image} alt={hotel.title} />
       <p>Địa chỉ: {hotel.address}</p>
       <p>Đánh giá: {hotel.rating}</p>
@@ -83,8 +116,13 @@ function HotelDetails() {
       <p>Website: <a href={hotel.website}>{hotel.website}</a></p>
 
       <div className="comments-section">
+        <h2>Đánh giá</h2>
+        <Rate defaultValue={5} style={{ marginTop: 8 }} allowHalf onChange={handleSubmitRate} />
+      </div>
+
+      <div className="comments-section">
         <h2>Bình luận</h2>
-        
+
         {/* Display Comments */}
         <div className="comments-list">
           {comments.map((comment) => (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios"; // Import axios
 import { useNavigate } from "react-router-dom";
-import { Button, Form, Input, Modal } from "antd";
+import { Button, Form, Input, message, Modal } from "antd";
 
 const Login = ({ setLogin }) => {
   const [openLogin, setOpenLogin] = useState(false);
@@ -12,30 +12,24 @@ const Login = ({ setLogin }) => {
 
   const handleSubmitLogin = async () => {
     setLoading(true);
-    try {
-      // Gửi yêu cầu POST tới server
-      const response = await axios.post("http://localhost:3000/login", {
-        username,
-        password,
-      });
-
-      // Lưu accessToken vào localStorage
-      const { accessToken } = response.data;
-      localStorage.setItem("accessToken", JSON.stringify(accessToken));
-      console.log("Access token saved:", accessToken);
-
-      // Đặt trạng thái đăng nhập
-      setLogin(true);
-
-      // Điều hướng tới trang /home
-      navigate("/home");
-    } catch (error) {
-      console.error("Login failed:", error.response?.data || error.message);
-      alert("Đăng nhập thất bại. Vui lòng kiểm tra lại tài khoản!");
-    } finally {
-      setLoading(false);
-      setOpenLogin(false);
-    }
+    await axios.post("http://localhost:3000/login", {
+      password,
+      username,
+    })
+      .then(res => {
+        if (!res.data) {
+          message.error("Tên đăng nhập hoặc mật khẩu không đúng")
+          setLoading(false);
+          return false
+        } else {
+          const { accessToken } = res.data;
+          localStorage.setItem("accessToken", JSON.stringify(accessToken));
+          console.log("Access token saved:", accessToken);
+          setLogin(true);
+          setLoading(false);
+          setOpenLogin(false);
+        }
+      })
   };
 
   const openLoginPanel = () => {

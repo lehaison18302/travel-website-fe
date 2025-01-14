@@ -1,6 +1,7 @@
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import { Input, List, Pagination, Rate, Tooltip } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import apiCommon from "src/apis/functionApi";
 const { Search } = Input;
 
 const listVoteFake = [
@@ -201,9 +202,20 @@ const ListFav = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
 
-  const data = listVoteFake;
-  const startIndex = (currentPage - 1) * pageSize;
-  const currentData = data.slice(startIndex, startIndex + pageSize);
+  const [data, setData] = useState(listVoteFake);
+  const accountId = JSON.parse(localStorage.getItem("accessToken"))?.user_id;
+  const startIndex = 0
+  const currentData = []
+  useEffect(() => {
+    fetchData();
+  }, [])
+  const fetchData = () => {
+    apiCommon.getFavourite({ user_id: accountId }).then(res => {
+      setData(res);
+      startIndex = (currentPage - 1) * pageSize;
+      currentData = res.data.slice(startIndex, startIndex + pageSize);
+    })
+  }
 
   const onPageChange = (page, size) => {
     setCurrentPage(page);

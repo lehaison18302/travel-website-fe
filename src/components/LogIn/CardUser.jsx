@@ -4,8 +4,8 @@ import { DownOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 const CardUser = ({ logout }) => {
-  const account = JSON.parse(localStorage.getItem("account"));
-  const UserName = account ? account.username : "";
+  const account = JSON.parse(localStorage.getItem("accessToken"));
+  const UserName = account ? account.displayName : "";
 
   const menuItems = [
     {

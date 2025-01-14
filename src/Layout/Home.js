@@ -3,7 +3,7 @@ import HomeHero from "../components/HomeHero";
 import Footer from "../components/Footer";
 import Trip from "src/components/Trip";
 import Hotels from "src/components/Hotels";
-import Restaurants from "src/components/Restaurants";
+import Restaurants from "src/components/Restaurant/Restaurants";
 import homeVideo from "src/assets/images/home.mp4";
 import { Destination } from "src/components/Destination";
 

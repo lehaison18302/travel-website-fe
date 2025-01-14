@@ -13,8 +13,20 @@ const apiCommon = {
     const url = "suggestRestaurant";
     return axiosClient.get(url);
   },
+  getCommentLocation: (id) => {
+    const url = `commentsLocation?trip_id=${id}`;
+    return axiosClient.get(url);
+  },
+  getCommentRestaurant: (id) => {
+    const url = `commentsRestaurant?restaurant_id=${id}`;
+    return axiosClient.get(url);
+  },
+  getCommentHotel: (id) => {
+    const url = `commentsHotel?hotel_id=${id}`;
+    return axiosClient.get(url);
+  },
   submitVoteLocation: (data) => {  // data bao gom (id, user_id, ratingScore)
-    const url = `voteLocation`;  
+    const url = `voteLocation`;
     return axiosClient.post(url, data);
   },
   submitVoteHotel: (data) => {  // data bao gom (id, user_id, ratingScore)
@@ -25,9 +37,9 @@ const apiCommon = {
     const url = `voteRestaurant`;
     return axiosClient.post(url, data);
   },
-  getVote: () => {  //(get) server cung cấp danh sách các bài viết bạn đã vote, hiển thị trang qly tài khoản - lịch sử đánh giá
+  getVote: (data) => {  //(get) server cung cấp danh sách các bài viết bạn đã vote, hiển thị trang qly tài khoản - lịch sử đánh giá
     const url = "vote";
-    return axiosClient.get(url);
+    return axiosClient.post(url, data);
   },
   addFavLocation: (data) => { //(post) client gửi về user_id, location_id khi bấm vào yêu thích địa điểm, server sẽ lưu thông tin
     const url = `favouriteLocation`;
@@ -41,25 +53,17 @@ const apiCommon = {
     const url = `favouriteRestaurant`;
     return axiosClient.post(url, data);
   },
-  getFavLocation: () => {  //(get) api cung cấp thông tin các địa điểm đã yêu thích (gồm các trường: id, title, address, latitude(bỏ), longitude(bỏ), rating, ratingCount, category, image, phoneNumber, website)
-    const url = "favouriteLocation1";
-    return axiosClient.get(url);
-  },
-  getFavHotel: () => {  //(get) api cung cấp thông tin các khách sạn đã yêu thích (gồm các trường: id, title, address, latitude(bỏ), longitude(bỏ), rating, ratingCount, category, image, phoneNumber, website)
-    const url = "favouriteLocation2";
-    return axiosClient.get(url);
-  },
-  getFavRestaurant: () => {  //(get) api cung cấp thông tin các nhà hàng đã yêu thích (gồm các trường: id, title, address, latitude(bỏ), longitude(bỏ), rating, ratingCount, category, image, phoneNumber, website)
-    const url = "favouriteLocation3";
-    return axiosClient.get(url);
+  getFavourite: (data) => {
+    const url = "getFavourite";
+    return axiosClient.post(url, data);
   },
   deleteFav: () => { //(delete) api xóa địa điểm yêu thích, client gửi về id cần xóa, nút xóa ở trên từng thẻ địa điểm trong mục danh sách địa điểm đã yêu thích ở phần quản lý tài khoản
     const url = "removeFavourite";
     return axiosClient.delete(url);
   },
   search: (data) => { //(post) client gửi dữ liệu tìm kiếm dạng string về bằng put, server gửi lại mảng các đối tượng trùng khớp dạng json
-    const url = "search";
-    return axiosClient.post(url, data);
+    const url = `search=${data.query}`;
+    return axiosClient.get(url);
   },
   deleteCommentLocation: () => { //(delete) client gửi id comment cần xóa về server để xóa, nút xóa để ở bên tay phải của từng comment
     const url = "deleteCommentLocation";
@@ -84,6 +88,14 @@ const apiCommon = {
   editCommentRestaurant: () => {//(put) client gửi id comment cần sửa với phuong thức put về server để cập nhật bình luận (nút sửa để bên phải từng comment)
     const url = "editCommentRestaurant";
     return axiosClient.put(url);
+  },
+  getRestaurantInfo: (id) => {//(put) client gửi id comment cần sửa với phuong thức put về server để cập nhật bình luận (nút sửa để bên phải từng comment)
+    const url = `hoteIlD/${id}`;
+    return axiosClient.get(url);
+  },
+  updateInfoUser: (data) => {
+    const url = `updateUser`;
+    return axiosClient.post(url, data);
   },
 };
 export default apiCommon;

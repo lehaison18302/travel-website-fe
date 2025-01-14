@@ -29,9 +29,9 @@ import { ItemPlaceInfo } from "./ItemPlaceInfo";
 import apiCommon from "src/apis/functionApi";
 
 // Helper function to render ranking icons
-const renderRankingIcon = (tier) => {
+const renderRankingIcon = (ranking) => {
   const iconStyles = { fontSize: 24 };
-  switch (tier) {
+  switch (ranking) {
     case 1:
       return (
         <CrownFilled
@@ -59,7 +59,7 @@ const renderRankingIcon = (tier) => {
           className="flex jusCen"
           style={{ ...iconStyles, color: "gray" }}
         >
-          {tier}
+          {ranking}
         </strong>
       );
   }
@@ -68,18 +68,18 @@ const renderRankingIcon = (tier) => {
 // Table columns configuration
 const columns = [
   {
-    key: "tier",
-    dataIndex: "tier",
+    key: "ranking",
+    dataIndex: "ranking",
     render: renderRankingIcon,
     width: 4
   },
   {
-    dataIndex: "name",
-    key: "name"
+    dataIndex: "title",
+    key: "title"
   },
   {
-    dataIndex: "vote",
-    key: "vote",
+    dataIndex: "rating",
+    key: "rating",
     render: (data) => (
       <div className="flex">
         <strong>{data}</strong>
@@ -93,8 +93,9 @@ function Destination() {
   const [ranking, setRanking] = useState(
     dataDiaDiemFake
       .slice(0, 5)
-      .map((item, index) => ({ ...item, tier: index + 1 }))
+      .map((item, index) => ({ ...item, ranking: index + 1 }))
   );
+  const [listComment, setListComment]= useState([]);
   const [showComment, setShowComment] = useState(false);
   const [currentItem, setCurrentItem] = useState(dataDiaDiemFake[0]);
   const [listPlace, setListPlace] = useState(dataDiaDiemFake);
@@ -103,23 +104,56 @@ function Destination() {
   const [message, setMessage] = useState("");
   const [rating, setRating] = useState(0);
   const [openTabComment, setOpenTabComment] = useState(false);
+  const [typeSearch, setTypeSearch] = useState(0);
+  let startIndex = (currentPage - 1) * pageSize;
 
-  const startIndex = (currentPage - 1) * pageSize;
-  const currentData = listPlace.slice(startIndex, startIndex + pageSize);
+  const [currentData, setCurrentData] = useState([]);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await apiCommon.getSuggestLocation();
-        setListPlace(data)
-        console.log(data);
-
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
     fetchData();
-  }, []);
+  }, [currentPage, pageSize, typeSearch]);
+
+  const fetchData = async () => {
+    const getApi = getSuggestionApi(typeSearch);
+    try {
+      getApi().then(res => {
+        let data = res.data
+        setListPlace(data)
+        setRanking((
+          data
+            .slice(0, 5)
+            .map((item, index) => ({ ...item, ranking: index + 1 }))
+        ))
+        setCurrentData(data?.slice(startIndex, startIndex + pageSize));
+      })
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  function getSuggestionApi(type) {
+    switch (type) {
+      case 1:
+        return apiCommon.getSuggestRestaurant;
+      case 2:
+        return apiCommon.getSuggestHotel;
+      case 0:
+      default:
+        return apiCommon.getSuggestLocation;
+    }
+  }
+
+  function getCommentApi(type) {
+    switch (type) {
+      case 1:
+        return apiCommon.getCommentRestaurant;
+      case 2:
+        return apiCommon.getCommentHotel;
+      case 0:
+      default:
+        return apiCommon.getCommentLocation;
+    }
+  }
+
   const handleSend = () => {
     if (message.trim() && rating > 0) {
       alert("Comment added!");
@@ -134,6 +168,20 @@ function Destination() {
     setCurrentPage(page);
     setPageSize(size);
   };
+
+  const handleopenPanelDetail = (item) => {
+    let api = getCommentApi(typeSearch);
+    try {
+      api(item.id).then((res) => {
+        console.log(res);
+        setListComment(res.data)
+        setCurrentItem(item);
+        setOpenTabComment(true);
+      })
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
 
   return (
     <div className="search-layout flex jusCen">
@@ -165,6 +213,7 @@ function Destination() {
                 defaultValue="Địa điểm"
                 style={{ width: 120 }}
                 options={optionSelectSearch}
+                onChange={e => setTypeSearch(e)}
               />
             }
             placeholder="Tìm kiếm theo tên"
@@ -185,7 +234,9 @@ function Destination() {
                 {
                   <ItemPlaceInfo
                     item={item}
-                    toggleComment={() => setOpenTabComment(true)}
+                    toggleComment={() => {
+                      handleopenPanelDetail(item)
+                    }}
                   />
                 }
               </List.Item>
@@ -214,16 +265,16 @@ function Destination() {
         <div className="flex jusCen">
           <img
             className="item-vote-img"
-            src={currentItem.img}
-            alt={`Hình ảnh của ${currentItem.name}`}
+            src={currentItem.image}
+            alt={`Hình ảnh của ${currentItem.title}`}
             style={{ width: 100, height: 100, objectFit: "cover" }}
           />
           <div className="item-vote-text">
             <div className="item-vote-name">
-              <strong style={{ fontSize: 20 }}>{currentItem.name}</strong>
+              <strong style={{ fontSize: 20 }}>{currentItem.title}</strong>
               <div style={{ cursor: "pointer" }}>
-                <Tooltip title={`${currentItem.vote} sao`} color="#1677ff">
-                  <Rate allowHalf disabled value={currentItem.vote} />
+                <Tooltip title={`${currentItem.rating} sao`} color="#1677ff">
+                  <Rate allowHalf disabled value={currentItem.rating} />
                 </Tooltip>
               </div>
             </div>
@@ -231,11 +282,15 @@ function Destination() {
               <span style={{ fontWeight: 600 }}>Địa chỉ: </span>
               <span style={{ fontStyle: "italic" }}>{currentItem.address}</span>
             </div>
+            <div style={{ fontSize: 16 }}>
+              <span style={{ fontWeight: 600 }}>Chi tiết: </span>
+              <span style={{ fontStyle: "italic" }}>{currentItem.category}</span>
+            </div>
           </div>
         </div>
-        <div class="detail-des-info">
-          <p>{currentItem.des}</p>
-        </div>
+        {/* <div class="detail-des-info">
+          <p>{currentItem.category}</p>
+        </div> */}
         <div style={{ width: "100%" }}>
           <Button.Group size="large" style={{ width: "100%" }}>
             <Button
@@ -295,7 +350,7 @@ function Destination() {
             margin: "12px 0"
           }}
         ></div>
-        <CommentList visible={showComment} comments={dataCommentFake} />
+        <CommentList visible={showComment} comments={listComment} />
       </Drawer>
     </div>
   );

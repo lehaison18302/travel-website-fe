@@ -8,7 +8,7 @@ export const ItemPlaceInfo = ({ item, toggleComment }) => (
     <img
       className="item-vote-img"
       src={item.image}
-      alt={`Hình ảnh của ${item.name}`}
+      alt={`Hình ảnh của ${item.title}`}
       style={{ width: 100, height: 100, objectFit: "cover" }}
     />
     <div className="item-vote-text">

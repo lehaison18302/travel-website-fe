@@ -11,6 +11,7 @@ import {
 import { AutoComplete, Avatar, Card, Input, Rate, Tooltip } from "antd";
 import Login from "./LogIn/Login";
 import CardUser from "./LogIn/CardUser";
+import apiCommon from "src/apis/functionApi";
 const { Search } = Input;
 const resultFake = [
   {
@@ -35,11 +36,11 @@ const Navbar = () => {
   const [resultSearch, setResult] = useState([]);
   const [searchText, setSearchText] = useState("");
   useEffect(() => {
-    const account = localStorage.getItem("account");
+    const account = localStorage.getItem("accessToken");
     setIsLogin(!!account);
 
     const handleStorageChange = () => {
-      const account = localStorage.getItem("account");
+      const account = localStorage.getItem("accessToken");
       setIsLogin(!!account);
     };
 
@@ -95,6 +96,12 @@ const Navbar = () => {
     localStorage.removeItem("account");
     setIsLogin(false);
   };
+
+  const handleSearch = (e) => {
+    apiCommon.search({ query: e }).then((res) => {
+      console.log(res.data);
+    })
+  }
   return (
     <nav className="NavbarItems">
       <div className="navbar-logo" onClick={() => navigate("/home")}>
@@ -108,7 +115,7 @@ const Navbar = () => {
           style={{ width: 400 }}
           popupMatchSelectWidth={252}
         >
-          <Input.Search placeholder="Bạn muốn đi đến đâu?" enterButton />
+          <Input.Search placeholder="Bạn muốn đi đến đâu?" onChange={(e) => handleSearch(e.target.value)} enterButton />
         </AutoComplete>
       </div>
       <div className="menu-icons" onClick={handleClick}>
@@ -122,12 +129,12 @@ const Navbar = () => {
             Điểm đến
           </Link>
         </li>
-        <li key={1}>
+        {/* <li key={1}>
           <Link className={"nav-links"} to={"/about"}>
             <InfoCircleOutlined />
             Thông tin
           </Link>
-        </li>
+        </li> */}
         <li key={2}>
           <Link className={"nav-links"} to={"/contact"}>
             <PhoneOutlined />
@@ -135,7 +142,7 @@ const Navbar = () => {
           </Link>
         </li>
       </ul>
-      {isLogin ? <CardUser logout={logout}></CardUser> : <Login setLogin={setIsLogin}  />}
+      {isLogin ? <CardUser logout={logout}></CardUser> : <Login setLogin={setIsLogin} />}
     </nav>
   );
 };

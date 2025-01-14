@@ -1,45 +1,57 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import apiCommon from "src/apis/functionApi";
 import { Button, message, Rate } from "antd";
-import apiCommon, { addFavLocation, submitVoteLocation } from "src/apis/functionApi";
-import { HeartOutlined } from "@ant-design/icons";
-
-function TripDetails() {
-  const [trip, setTrip] = useState(null);
+import { HeartFilled, HeartOutlined } from "@ant-design/icons";
+function RestaurantDetails() {
+  const [item, setItem] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const location = useLocation();
-  const { id } = location.state || {}; // Lấy id từ state
+  const restaurant = useLocation();
+  const { id } = restaurant.state || {};
 
   // Lấy thông tin người dùng từ localStorage
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const userId = accessToken?.user_id; // Lấy user_id từ localStorage
   const displayName = accessToken?.displayName; // Lấy displayName từ localStorage
-
-  // Fetch trip details and comments
+  // Fetch item details and comments
   useEffect(() => {
     if (id) {
-      // Fetch trip details
-      axios.get(`http://localhost:3000/tripID/${id}`)
+      // Fetch item details
+      apiCommon.getRestaurantInfo(id)
         .then(response => {
-          setTrip(response.data);
+          response.data = { ...response.data, isLiked: true, }
+          setItem(response.data);
         })
         .catch(error => {
-          console.error("Error fetching trip details:", error);
+          console.error("Error fetching item details:", error);
         });
 
-      // Fetch comments for this trip
-      axios.get(`http://localhost:3000/commentsLocation?trip_id=${id}`)
+      // Fetch comments for this item
+      axios.get(`http://localhost:3000/comments?restaurant_id=${id}`)
         .then(response => {
           setComments(response.data);
-          console.log("Fetched Comments:", response.data); // Log dữ liệu bình luận
         })
         .catch(error => {
           console.error("Error fetching comments:", error);
         });
     }
   }, [id]);
+
+  const handleAddFav = () => {
+    try {
+      let data = {
+        hotel_id: id,
+        user_id: userId,
+      }
+      apiCommon.addFavHotel(data).then(() => {
+        message.success("Lưu đánh giá thành công")
+      })
+    } catch (error) {
+      message.error(error.message)
+    }
+  }
 
   const handleSubmitRate = (value) => {
     try {
@@ -48,50 +60,38 @@ function TripDetails() {
         user_id: userId,
         ratingScore: value
       }
-      apiCommon.submitVoteLocation(data).then(() => {
+      apiCommon.submitVoteRestaurant(data).then(() => {
         message.success("Lưu đánh giá thành công")
       })
     } catch (error) {
       message.error(error.message)
     }
   }
-  const handleAddFav = () => {
-    try {
-      let data = {
-        location_id: id,
-        user_id: userId,
-      }
-      apiCommon.addFavLocation(data).then(() => {
-        message.success("Lưu đánh giá thành công")
-      })
-    } catch (error) {
-      message.error(error.message)
-    }
-  }
+
   // Submit a new comment
   const handleCommentSubmit = () => {
-    if (!accessToken || !userId) {  //anh ơi cái thông tin người dùng của phiên đăng nhập lưu ở account chứ không lưu ở accessToken anh ới
+    if (!accessToken || !userId) {
       alert("Bạn cần đăng nhập để bình luận.");
       return;
     }
 
     if (newComment.trim()) {
       const commentData = {
-        trip_id: id, // Sử dụng trip_id từ state
+        hotel_id: id,
         user_id: userId, // Lấy user_id từ localStorage
-        comment: newComment, // Dữ liệu bình luận
+        comment_text: newComment,
       };
 
-      console.log("Sending Comment Data:", commentData); // Log dữ liệu gửi đi
+      console.log("Sending Comment Data:", commentData); // Kiểm tra dữ liệu trước khi gửi
 
-      axios.post("http://localhost:3000/commentsLocation", commentData)
+      axios.post("http://localhost:3000/commentsHotel", commentData)
         .then(response => {
           console.log("Comment Added:", response.data);
           const newCommentItem = {
-            comment_id: response.data.comment_id, // ID bình luận từ server
-            comment_text: newComment, // Nội dung bình luận
-            comment_created_at: new Date().toISOString(), // Thời gian bình luận
-            user_display_name: displayName, // Tên hiển thị người dùng
+            id: response.data.id,
+            comment_text: newComment,
+            created_at: new Date().toISOString(),
+            displayName: displayName, // Hiển thị đúng tên từ localStorage
           };
           setComments([newCommentItem, ...comments]); // Thêm bình luận mới vào đầu danh sách
           setNewComment(""); // Xóa nội dung bình luận sau khi gửi
@@ -102,34 +102,33 @@ function TripDetails() {
     }
   };
 
-  if (!trip) return <div>Loading...</div>;
+  if (!item) return <div>Loading...</div>;
 
   return (
-    <div className="trip-details">
+    <div className="item-details">
       <div className="flex" style={{ justifyContent: 'space-between' }}>
-        <h1>{trip.title}</h1>
-        <Button disabled={trip.isLiked} onClick={() => handleAddFav()} icon={trip.isLiked ? <HeartFilled style={{ color: 'red' }}/> : <HeartOutlined />} />
-
+        <h1>{item.title}</h1>
+        <Button disabled={item.isLiked} onClick={() => handleAddFav()} icon={item.isLiked ? <HeartFilled style={{ color: 'red' }} /> : <HeartOutlined />} />
       </div>
-      <img src={trip.image} alt={trip.title} />
-      <p>Địa chỉ: {trip.address}</p>
-      <p>Đánh giá: {trip.rating}</p>
-      <p>Loại hình: {trip.category}</p>
-      <p>Website: <a href={trip.website}>{trip.website}</a></p>
+      <img src={item.image} alt={item.title} />
+      <p>Địa chỉ: {item.address}</p>
+      <p>Đánh giá: {item.rating}</p>
+      <p>Số điện thoại: {item.phoneNumber}</p>
+      <p>Website: <a href={item.website}>{item.website}</a></p>
       <div className="comments-section">
         <h2>Đánh giá</h2>
         <Rate defaultValue={5} style={{ marginTop: 8 }} allowHalf onChange={handleSubmitRate} />
       </div>
-
       <div className="comments-section">
         <h2>Bình luận</h2>
 
-        <div style={{ marginTop: 8 }} className="comments-list">
+        {/* Display Comments */}
+        <div className="comments-list">
           {comments.map((comment) => (
-            <div key={comment.comment_id} className="comment-item">
-              <p><strong>{comment.user_display_name}</strong></p>
+            <div key={comment.id} className="comment-item">
+              <p><strong>{comment.displayName}</strong></p>
               <p>{comment.comment_text}</p>
-              <p><small>{new Date(comment.comment_created_at).toLocaleString()}</small></p>
+              <p><small>{new Date(comment.created_at).toLocaleString()}</small></p>
             </div>
           ))}
         </div>
@@ -148,4 +147,4 @@ function TripDetails() {
   );
 }
 
-export default TripDetails;
+export default RestaurantDetails;
