@@ -64,6 +64,7 @@ const Navbar = () => {
 
     //xử lý chuyển trang
   };
+  /*
   const onSearch = (text) => {
     console.log(text);
     let list = resultFake.map((item, index) => {
@@ -89,6 +90,7 @@ const Navbar = () => {
     });
     setResult(list);
   };
+  */
   const onSelect = (arg) => {
     console.log(arg);
   };
@@ -97,11 +99,43 @@ const Navbar = () => {
     setIsLogin(false);
   };
 
-  const handleSearch = (e) => {
-    apiCommon.search({ query: e }).then((res) => {
-      console.log(res.data);
-    })
-  }
+  const handleSearch = (query) => {
+    // Gọi API tìm kiếm
+    apiCommon.search({ query }).then((res) => {
+      const serverData = res.data; // Dữ liệu từ server
+      const formattedData = serverData.map((item, index) => ({
+        value: item.title, // Giá trị hiển thị trong ô tìm kiếm
+        label: (
+          <div key={index}>
+            <Card.Meta
+              title={<strong>{item.title}</strong>}
+              onClick={() => handleChooseSearch(item)} // Thêm logic xử lý khi chọn
+              description={
+                <Tooltip title={item.address} placement="right">
+                  <div className="label-research-container">
+                    <span>{item.address}</span>
+                    <Rate defaultValue={item.rate || 0} disabled />
+                  </div>
+                </Tooltip>
+              }
+            />
+          </div>
+        ),
+      }));
+      // Cập nhật danh sách gợi ý
+      setResult(formattedData);
+    });
+  };
+
+  const onSearch = (text) => {
+    console.log("Searching for:", text);
+    if (text) {
+      handleSearch(text); // Gọi tìm kiếm khi có input
+    } else {
+      setResult([]); // Xóa gợi ý khi không có từ khóa
+    }
+  };
+  
   return (
     <nav className="NavbarItems">
       <div className="navbar-logo" onClick={() => navigate("/home")}>

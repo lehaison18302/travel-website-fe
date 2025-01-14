@@ -61,9 +61,9 @@ const apiCommon = {
     const url = "removeFavourite";
     return axiosClient.delete(url);
   },
-  search: (data) => { //(post) client gửi dữ liệu tìm kiếm dạng string về bằng put, server gửi lại mảng các đối tượng trùng khớp dạng json
-    const url = `search=${data.query}`;
-    return axiosClient.get(url);
+  search: (data) => { 
+    const url = `search`; // Đảm bảo đường dẫn đúng đến endpoint
+    return axiosClient.get(url, { params: { search: data.query } }); // Đưa query vào params
   },
   deleteCommentLocation: () => { //(delete) client gửi id comment cần xóa về server để xóa, nút xóa để ở bên tay phải của từng comment
     const url = "deleteCommentLocation";

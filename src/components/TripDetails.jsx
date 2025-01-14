@@ -62,7 +62,7 @@ function TripDetails() {
         user_id: userId,
       }
       apiCommon.addFavLocation(data).then(() => {
-        message.success("Lưu đánh giá thành công")
+        message.success("Lưu địa điểm thành công")
       })
     } catch (error) {
       message.error(error.message)
@@ -70,7 +70,7 @@ function TripDetails() {
   }
   // Submit a new comment
   const handleCommentSubmit = () => {
-    if (!accessToken || !userId) {  //anh ơi cái thông tin người dùng của phiên đăng nhập lưu ở account chứ không lưu ở accessToken anh ới
+    if (!accessToken || !userId) {  
       alert("Bạn cần đăng nhập để bình luận.");
       return;
     }

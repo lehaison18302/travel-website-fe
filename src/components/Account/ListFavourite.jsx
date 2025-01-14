@@ -32,13 +32,13 @@ const ListFav = () => {
       <div className="item-vote">
         <img
           className="item-vote-img"
-          src={item.img}
-          alt={`Hình ảnh của ${item.name}`}
+          src={item.image}
+          alt={`Hình ảnh của ${item.title}`}
           style={{ width: 100, height: 100, objectFit: "cover" }}
         />
         <div className="item-vote-text">
           <div className="item-vote-name">
-            <strong style={{ fontSize: 20 }}>{item.name} </strong>
+            <strong style={{ fontSize: 20 }}>{item.title} </strong>
             <div>
               {item.isLiked ? (
                 <HeartFilled
@@ -47,8 +47,8 @@ const ListFav = () => {
               ) : (
                 <HeartOutlined style={{ marginRight: 8, fontSize: 18 }} />
               )}
-              <Tooltip title={`${item.vote} sao`} color="#1677ff">
-                <Rate allowHalf disabled value={item.vote} />
+              <Tooltip title={`${item.rating} sao`} color="#1677ff">
+                <Rate allowHalf disabled value={item.rating} />
               </Tooltip>
             </div>
           </div>
@@ -64,7 +64,6 @@ const ListFav = () => {
       </div>
     );
   };
-
   return (
     <div className="account-info-card">
       <Search placeholder="Tìm kiếm theo tên địa điểm" enterButton />
