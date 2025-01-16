@@ -26,16 +26,8 @@ function Restaurants() {
       });
   }, []);
 
-  const handleHotelClick = (id) => {
-    axios.get(`http://localhost:3000/restaurantsID/${id}`)
-      .then(response => {
-        console.log('ID posted successfully:', response.data);
-        // Uncomment this line if navigation is needed
-        // navigate(`/hotelsID`, { state: { tripDetails: response.data } });
-      })
-      .catch(error => {
-        console.error('Error posting ID:', error);
-      });
+  const handleRestaurantClick = (id) => {
+    navigate(`/hotelInfo/${id}`, { state: { id } });
   };
 
   const settings = {
@@ -63,7 +55,7 @@ function Restaurants() {
           <div 
             key={index} 
             className="t-card-container" 
-            onClick={() => handleHotelClick(restaurant.id)}
+            onClick={() => handleRestaurantClick(restaurant.id)}
           >
             <RestaurantData
               image={restaurant.image}

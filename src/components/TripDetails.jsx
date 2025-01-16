@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { Button, message, Rate } from "antd";
 import apiCommon, { addFavLocation, submitVoteLocation } from "src/apis/functionApi";
 import { HeartOutlined } from "@ant-design/icons";
 
-function TripDetails() {
+function TripDetails({props}) {
   const [trip, setTrip] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const location = useLocation();
-  const { id } = location.state || {}; // Lấy id từ state
+  const { id } = useParams() || {}; // Lấy id từ state
 
   // Lấy thông tin người dùng từ localStorage
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import apiCommon from "src/apis/functionApi";
 import { Button, message, Rate } from "antd";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
@@ -9,7 +9,7 @@ function HotelDetails() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const location = useLocation();
-  const { id } = location.state || {}; // Lấy id từ state
+  const { id } = useParams() || {}; // Lấy id từ state
 
   // Lấy thông tin người dùng từ localStorage
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
@@ -107,7 +107,7 @@ function HotelDetails() {
     <div className="hotel-details">
       <div className="flex" style={{ justifyContent: 'space-between' }}>
         <h1>{hotel.title}</h1>
-        <Button disabled={hotel.isLiked} onClick={() => handleAddFav()} icon={hotel.isLiked ? <HeartFilled style={{ color: 'red' }} /> : <HeartOutlined />} />
+        <Button onClick={() => handleAddFav()} icon={hotel.isLiked ? <HeartFilled style={{ color: 'red' }} /> : <HeartOutlined />} />
       </div>
       <img src={hotel.image} alt={hotel.title} />
       <p>Địa chỉ: {hotel.address}</p>

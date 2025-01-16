@@ -60,9 +60,17 @@ const Navbar = () => {
     setClicked(!clicked);
   };
   const handleChooseSearch = (item) => {
-    console.log(item);
-
-    //xử lý chuyển trang
+    // console.log(item);
+    let id1 = item.id
+    if (item.source === "hotels") {
+      navigate(`/hotelInfo/${item.id}`, { state: { id1 } });
+    } else if (item.source === "restaurant") {
+      navigate(`/restaurantInfo/${item.id}`, { state: { id1 } });
+    } else if (item.source === "location") {
+      navigate(`/tripInfo/${item.id}`, { state: { id1 } });
+    } else {
+      console.error("Unknown source:", item.source);
+    }
   };
   /*
   const onSearch = (text) => {
@@ -109,7 +117,7 @@ const Navbar = () => {
           <div key={index}>
             <Card.Meta
               title={<strong>{item.title}</strong>}
-              onClick={() => handleChooseSearch(item)} // Thêm logic xử lý khi chọn
+              onClick={() => handleChooseSearch({ source: item.source, id: item.id })} // Thêm logic xử lý khi chọn
               description={
                 <Tooltip title={item.address} placement="right">
                   <div className="label-research-container">
@@ -135,7 +143,7 @@ const Navbar = () => {
       setResult([]); // Xóa gợi ý khi không có từ khóa
     }
   };
-  
+
   return (
     <nav className="NavbarItems">
       <div className="navbar-logo" onClick={() => navigate("/home")}>

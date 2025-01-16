@@ -27,7 +27,7 @@ function Hotels() {
   }, []);
 
   const handleHotelClick = (id) => {
-    navigate(`/hotelID`, { state: { id } });
+    navigate(`/hotelInfo/${id}`, { state: { id } });
   };
 
   const settings = {

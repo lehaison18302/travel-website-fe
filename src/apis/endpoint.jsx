@@ -23,8 +23,6 @@ const apiEndpoints = {
     commentEdit2: `${BASE_URL}/editCommentHotel`, // tương tự
     commentEdit3: `${BASE_URL}/editCommentRestaurant`, // tương tự
     contact: `${BASE_URL}/contact` // client gửi user_id, title, address, image, phoneNumber, website từ client (trong đó title, address, image, phoneNumber, website được điền từ form) để gửi về server (đã làm xong)
-    // Anh ơi nhớ thông tin người dùng lưu trong localStorage, thông tin sau khi đăng nhập lưu ở accessToken. (em đã sửa lại trang login r nhe)
-    // dữ liệu bảng locations, hotels, restaurants gồm các trường: id, title, address, latitude(bỏ), longitude(bỏ), rating, ratingCount, category, image, phoneNumber, website
 };
 
 export default apiEndpoints;

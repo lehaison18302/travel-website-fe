@@ -28,7 +28,7 @@ function Trip() {
 
 
   const handleTripClick = (id) => {
-    navigate(`/tripID`, { state: { id } });
+    navigate(`/tripInfo/${id}`, { state: { id } });
   };
   
 

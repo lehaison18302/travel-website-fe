@@ -6,6 +6,7 @@ import Service from "./Layout/Service";
 import Contact from "./Layout/Contact";
 import TripDetail from "./Layout/TripDetail";
 import HotelDetail from "./Layout/HotelDetail";
+import RestaurantDetail from "./Layout/RestaurantDetail";
 import SearchPage from "./Layout/PlacePage";
 import Admin from "./Layout/Admin";
 import Feedback from "./Layout/Feedback";
@@ -19,8 +20,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route>
           <Route path="/home" element={<Home />} />
-          <Route path="/tripID" element={<TripDetail />} />
-          <Route path="/hotelID" element={<HotelDetail />} />
+          <Route path="/tripInfo/:id" element={<TripDetail />} />
+          <Route path="/hotelInfo/:id" element={<HotelDetail />} />
+          <Route path="/restaurantInfo/:id" element={<RestaurantDetail />} />
           <Route path="/about" element={<About />} />
           <Route path="/service" element={<Service />} />
           <Route path="/contact" element={<Contact />} />

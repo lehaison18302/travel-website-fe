@@ -42,10 +42,10 @@ function RestaurantDetails() {
   const handleAddFav = () => {
     try {
       let data = {
-        hotel_id: id,
+        restaurant_id: id,
         user_id: userId,
       }
-      apiCommon.addFavHotel(data).then(() => {
+      apiCommon.addFavRestaurant(data).then(() => {
         message.success("Lưu đánh giá thành công")
       })
     } catch (error) {
@@ -77,14 +77,14 @@ function RestaurantDetails() {
 
     if (newComment.trim()) {
       const commentData = {
-        hotel_id: id,
+        restaurant_id: id,
         user_id: userId, // Lấy user_id từ localStorage
         comment_text: newComment,
       };
 
       console.log("Sending Comment Data:", commentData); // Kiểm tra dữ liệu trước khi gửi
 
-      axios.post("http://localhost:3000/commentsHotel", commentData)
+      axios.post("http://localhost:3000/commentsRestaurant", commentData)
         .then(response => {
           console.log("Comment Added:", response.data);
           const newCommentItem = {
@@ -108,7 +108,7 @@ function RestaurantDetails() {
     <div className="item-details">
       <div className="flex" style={{ justifyContent: 'space-between' }}>
         <h1>{item.title}</h1>
-        <Button disabled={item.isLiked} onClick={() => handleAddFav()} icon={item.isLiked ? <HeartFilled style={{ color: 'red' }} /> : <HeartOutlined />} />
+        <Button onClick={() => handleAddFav()} icon={item.isLiked ? <HeartFilled style={{ color: 'red' }} /> : <HeartOutlined />} />
       </div>
       <img src={item.image} alt={item.title} />
       <p>Địa chỉ: {item.address}</p>
