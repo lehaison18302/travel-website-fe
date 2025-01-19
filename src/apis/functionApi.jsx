@@ -21,6 +21,18 @@ const apiCommon = {
     const url = `commentsRestaurant?restaurant_id=${id}`;
     return axiosClient.get(url);
   },
+  postCommentLocation: (data)=>{
+    const url = 'getCommentLocation';
+    return axiosClient.post(url, data)
+  },
+  postCommentHotel: (data)=>{
+    const url = 'getCommentLocation';
+    return axiosClient.post(url, data)
+  },
+  postCommentRestaurant: (data)=>{
+    const url = 'getCommentLocation';
+    return axiosClient.post(url, data)
+  },
   getCommentHotel: (id) => {
     const url = `commentsHotel?hotel_id=${id}`;
     return axiosClient.get(url);
