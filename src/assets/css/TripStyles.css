@@ -54,7 +54,15 @@
   font-size: 1.3rem;
   padding: 0.9rem 0 0.2rem 0;
 }
-
+.ant-tree-node-content-wrapper-normal{
+  width: 100%;
+}
+.ant-tree-treenode{
+  width: 100%;
+}
+.ant-tree-node-content-wrapper {
+width: 100%;
+}
 @media screen and (max-width: 850px) {
   .trip {
     margin: 4rem 2rem;
